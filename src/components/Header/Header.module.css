@@ -1,0 +1,20 @@
+.header{
+    background-color: #2E4F4F;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+.header > ul {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    gap: 20px;   
+    list-style: none;
+}
+ul>li>a{
+    
+    color: #0E8388;
+    text-transform: uppercase;
+    text-decoration-line: none;
+}

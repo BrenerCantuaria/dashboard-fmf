@@ -1,0 +1,45 @@
+  .container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  background-color: #2C3333;
+
+}
+.grid_item {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 12px;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+  display: grid;
+  grid-template-rows: 1fr ;
+  grid-gap: 12px;
+  padding: 1rem;
+  justify-items: center;
+  align-items: center;
+}
+
+.grid_table {
+  background-color: cadetblue;
+  align-items: center;
+  border: 1px solid #000; /* Apenas para visualização das áreas */
+}
+
+@media (min-width: 756px) {
+  .grid_item {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr; /* Duas linhas de tamanho igual */
+    /* Remova a configuração de colunas */
+  }
+  .card{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+  
+}
