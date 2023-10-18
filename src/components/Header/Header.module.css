@@ -4,6 +4,8 @@
     display: flex;
     justify-content: center;
     font-weight: bold;
+    padding: 0.8rem;
+    box-shadow: 20% ;
 }
 .header > ul {
     display: flex;

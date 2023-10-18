@@ -1,4 +1,5 @@
 .container{
+    padding: 1rem;
     background-color: darkgray;
     width:20rem;
     height:15rem;
@@ -11,6 +12,7 @@
 
 @media (min-width: 756px) {
     .container{
+        padding: 1rem;
         background-color: darkgray;
         width: 100%;
         height: 20rem;

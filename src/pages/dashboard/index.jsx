@@ -13,9 +13,9 @@ export default function DashBoard() {
         <PieChart/>
        </section>
        <section className={style.card}>
-          <Card/>
-          <Card/>
-          <Card/>
+          <Card title={"Dias de Visita"}/>
+          <Card title={"Dias de Visita"}/>
+          <Card title={"Dias de Visita"}/>
         </section>
        <section className={style.grid_table}>
          <Table/>
