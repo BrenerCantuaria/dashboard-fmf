@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import SideBar from "../../components/Sidebar/SideBar";
 import styles from "./Home.module.css";
 import Loading from "../../components/Load";
+import Footer from "../../components/Footer"
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
     <main className={styles.container}>
       <SideBar />
       {loading ? <Loading /> : <Outlet />}
+      <Footer/>
     </main>
   );
 }

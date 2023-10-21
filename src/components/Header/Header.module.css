@@ -9,14 +9,22 @@
 }
 .header > ul {
     display: flex;
+    align-items: center;
     flex-direction: row;
     text-decoration: none;
     gap: 20px;   
     list-style: none;
 }
 ul>li>a{
-    
     color: #0E8388;
     text-transform: uppercase;
     text-decoration-line: none;
 }
+
+.active_link {
+    background-color: #192e2e;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+

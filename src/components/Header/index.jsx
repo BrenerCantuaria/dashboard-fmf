@@ -1,16 +1,19 @@
+import { Link, useLocation } from "react-router-dom";
 import style from "./Header.module.css";
-import { Link } from "react-router-dom";
+
 export default function Header() {
+  const location = useLocation();
+
   return (
-    <header className={style.header}>
+    <nav className={style.header}>
       <ul>
-        <li>
+        <li className={location.pathname === '/' ? style.active_link : ''}>
           <Link to="/">DashBoard</Link>
         </li>
-        <li>
+        <li className={location.pathname === '/Clientes' ? style.active_link : ''}>
           <Link to="/Clientes">Clientes</Link>
         </li>
       </ul>
-    </header>
+    </nav>
   );
 }
