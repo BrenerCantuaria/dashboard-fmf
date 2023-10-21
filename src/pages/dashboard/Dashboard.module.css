@@ -10,7 +10,7 @@
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-gap: 12px;
-  padding: 1rem;
+  padding: 0.5rem;
   justify-content: center;
   align-items: center;
 }
@@ -18,7 +18,7 @@
   display: grid;
   grid-template-rows: 1fr ;
   grid-gap: 12px;
-  padding: 1rem;
+  padding: 0.5rem;
   justify-items: center;
   align-items: center;
 }
@@ -37,7 +37,7 @@
   }
   .card{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: center;
   }

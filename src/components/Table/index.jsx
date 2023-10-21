@@ -15,7 +15,7 @@ function Table() {
           <h1>Clientes mais visitados</h1>
         </header>
       </div>
-      <table>
+      <table className={style.table_container}>
         <thead>
           <td>Cliente</td>
           <td>Torre</td>

@@ -4,6 +4,7 @@ import FlowChart from "../../components/FlowChart"
 import PieChart from "../../components/PieTimeChart"
 import Table from "../../components/Table"
 import Card from "../../components/Card"
+import AppointmentsList from "../../components/AppointmentsList"
 import {Chart} from "chart.js"
 export default function DashBoard() {
   return (
@@ -14,8 +15,7 @@ export default function DashBoard() {
        </section>
        <section className={style.card}>
           <Card title={"Dias de Visita"}/>
-          <Card title={"Dias de Visita"}/>
-          <Card title={"Dias de Visita"}/>
+          <AppointmentsList/>
         </section>
        <section className={style.grid_table}>
          <Table/>

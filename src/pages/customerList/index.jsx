@@ -6,7 +6,7 @@ export default function CustomersList() {
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [flagFilter, setFlagFilter] = useState(false);
-
+  
   
 
   useEffect(() => {
