@@ -1,21 +1,19 @@
 import {
-  CategoryScale,
   Chart as ChartJS,
-  Legend,
-  LineElement,
+  CategoryScale,
   LinearScale,
-  PointElement,
+  BarElement,
   Title,
   Tooltip,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 import datajson from "../../db/db.json";
 import style from "./FlowCard.module.css";
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
@@ -81,7 +79,7 @@ const data = {
 export default function FlowCard() {
   return (
     <div className={style.container}>
-      <Line options={options} data={data} />
+      <Bar options={options} data={data} />
     </div>
   );
 }
