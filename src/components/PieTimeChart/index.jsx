@@ -1,16 +1,25 @@
- import style from "./PieChart.module.css";
+import style from "./PieChart.module.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 import datajson from "../../db/db.json";
 import { useEffect, useState } from "react";
+import { useApi } from "../../hooks/useApi";
 export default function PieChart() {
-  const [manha,setManha] = useState(0)
-  const [tarde,setTarde] = useState(0)
-  const [noite,setNoite] = useState(0)
+  const [manha, setManha] = useState(0);
+  const [tarde, setTarde] = useState(0);
+  const [noite, setNoite] = useState(0);
+  const [dataRecords, setDataRecords] = useState();
+  const api = useApi();
 
   useEffect(() => {
-    
+    const data = async () => {
+      const response = await api.getRecords();
+      setDataRecords(response);
+    };
+    data();
+  }, []);
+  useEffect(() => {
     const horariosDeEntrada = datajson.map((customer) => {
       let date = new Date(customer.horario);
       let hour = date.getHours();
@@ -23,7 +32,7 @@ export default function PieChart() {
       }
     });
   }, []);
-  
+
   const data = {
     labels: ["Manhã", "Tarde", "Noite"],
     datasets: [
@@ -36,14 +45,13 @@ export default function PieChart() {
           "rgba(255, 206, 86, 1)",
         ],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)", 
-          "rgba(54, 162, 235, 0.2)", 
-          "rgba(255, 206, 86, 0.2)", 
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
         ],
       },
     ],
   };
-  
 
   return (
     <div className={style.container}>
