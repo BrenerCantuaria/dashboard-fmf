@@ -1,17 +1,18 @@
 import { useContext, useState } from "react";
-import style from "./Login.module.css";
-import { AuthContext } from "../../context/auth/authcontext";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth/authcontext";
+import style from "./Login.module.css";
 function Login() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
     if (email,password) {
-      const isLogged = await auth.signin(email,password) 
+      const isLogged = await auth.signin(email,password)
       if (isLogged) {
         //home
         navigate("/");
@@ -24,13 +25,9 @@ function Login() {
   return (
     <main className={style.container}>
       <h1>Login</h1>
-      <form
-        method="post"
-        className={style.content_form}
-        onSubmit={handleLogin}
-      >
+      <form method="post" className={style.content_form} onSubmit={handleLogin}>
         <div>
-        <label>E-mail:</label>
+          <label>E-mail:</label>
           <input
             type="email"
             name="email"
@@ -43,7 +40,7 @@ function Login() {
           <label>Senha:</label>
           <input
             type="password"
-            name="email"
+            name="password"
             placeholder="digite sua senha aqui"
             value={password}
             onChange={(value) => setPassword(value.target.value)}
