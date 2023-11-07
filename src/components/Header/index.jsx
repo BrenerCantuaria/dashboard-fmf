@@ -28,6 +28,9 @@ export default function Header() {
           </li>
         )}
       </ul>
+      <div>
+        <h3>{auth.user?.email}</h3>
+      </div>
     </nav>
   );
 }
