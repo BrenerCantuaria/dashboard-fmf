@@ -14,7 +14,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/" element={<RequireAuth> <Home/> </RequireAuth>}>
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          >
             <Route path="/" element={<DashBoard />}></Route>
             <Route path="/Clientes" element={<Customers />}></Route>
           </Route>
