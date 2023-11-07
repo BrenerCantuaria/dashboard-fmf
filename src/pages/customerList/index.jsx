@@ -1,19 +1,28 @@
 import { FcSearch } from "react-icons/fc";
 import style from "./CustomerList.module.css";
 import { useEffect, useState } from "react";
+import { useApi } from "../../hooks/useApi";
 export default function CustomersList() {
   const [user, setUser] = useState([]);
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [flagFilter, setFlagFilter] = useState(false);
+  const api = useApi();
   
-  
-
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUser(data));
+    const data = async () => {
+      const response = await api.getUser();
+      setUser(response)
+      console.log("res do custumer: ",response);
+    };
+    data();
   }, []);
+
+  // useEffect(() => {
+  //   fetch("https://jsonplaceholder.typicode.com/users")
+  //     .then((res) => res.json())
+  //     .then((data) => setUser(data));
+  // }, []);
 
   useEffect(() => {
     const listaFiltrada = user.filter((user) => {
@@ -33,9 +42,7 @@ export default function CustomersList() {
           placeholder="buscar por cliente..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-        >
-          
-        </input>
+        ></input>
         <FcSearch size={30} />
       </div>
       <section className={style.table_clientes}>
@@ -45,10 +52,10 @@ export default function CustomersList() {
             <td>Email</td>
           </thead>
           <tbody>
-          {search === "" || flagFilter === false
+            {search === "" || flagFilter === false
               ? user.map((userData) => (
                   <tr key={userData.id}>
-                    <td>{userData.name}</td>
+                    <td>{userData.nome}</td>
                     <td>{userData.email}</td>
                   </tr>
                 ))
