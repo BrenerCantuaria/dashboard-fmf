@@ -4,42 +4,47 @@ import { AuthContext } from "./authcontext";
 
 // eslint-disable-next-line react/prop-types
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(() => {
+    const storageData = window.localStorage.getItem("user");
+    storageData ? localStorage.getItem("user") : null;
+  });
   const api = useApi();
 
-  useEffect(() => {
-    const validateToken = async () => {
-      const storage = localStorage.getItem("token");
-      if (storage) {
-        const data = await api.validateToken(storage);
-        if (data.user) {
-          setUser(data.user);
-        }
-      }
-    };
-    validateToken();
-  }, [api]);
-
-  const signin = async (email,password) => {
-    const data = await api.signin(email,password);
+  const signin = async (email, password) => {
+    const data = await api.signin(email, password);
+    console.log("data signin:", data);
     if (data.user && data.token) {
       setUser(data.user);
+      persistUser(data.user);
       setToken(data.token);
       return true;
     }
     return false;
   };
+  const persistUser = (user) => {
+    console.log("Persistir o user");
+    window.localStorage.setItem("user", JSON.stringify(user));
+  };
+  
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
 
   const signout = async () => {
     setUser(null);
-    setToken('')
-    await api.logout();
+    window.localStorage.removeItem("user");
+    window.localStorage.removeItem("token");
   };
 
   const setToken = (token) => {
     localStorage.setItem("token", token);
   };
 
+  //signout
   return (
     <AuthContext.Provider value={{ user, signin, signout }}>
       {children}
