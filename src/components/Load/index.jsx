@@ -1,10 +1,12 @@
-import style from "./Load.module.css"
-function Load() {
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import * as React from 'react';
+
+export default function Loading() {
   return (
-    <div>
-      <h1 className={style.container}>Carregando...</h1>
-    </div>
-  )
+    <Box sx={{ display: 'flex', justifyContent:'center'}}>
+      <CircularProgress />
+    </Box>
+  );
 }
 
-export default Load
