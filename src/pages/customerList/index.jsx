@@ -1,37 +1,34 @@
+import { useCallback, useEffect, useState } from "react";
 import { FcSearch } from "react-icons/fc";
-import style from "./CustomerList.module.css";
-import { useEffect, useState } from "react";
 import { useApi } from "../../hooks/useApi";
+import style from "./CustomerList.module.css";
+
 export default function CustomersList() {
   const [user, setUser] = useState([]);
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [flagFilter, setFlagFilter] = useState(false);
   const api = useApi();
-  
+
+  const dataResponse = useCallback(async () => {
+    const data = await api.getTeste();
+    setUser(data);
+  }, [api]);
+
   useEffect(() => {
-    const data = async () => {
-      const response = await api.getUser();
-      setUser(response)
-      console.log("res do custumer: ",response);
-    };
-    data();
+    dataResponse();
   }, []);
 
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/users")
-  //     .then((res) => res.json())
-  //     .then((data) => setUser(data));
-  // }, []);
-
   useEffect(() => {
-    const listaFiltrada = user.filter((user) => {
-      const LatterfirstName = user.name.split(" ")[0].toLowerCase();
-      return LatterfirstName === search.toLocaleLowerCase();
+    const listaFiltrada = user.filter((userDoFilter) => {
+      // userDoFilter.nome mudar para name
+      const firstName = String(userDoFilter.nome).includes(search)
+      return firstName; 
     });
     setFiltered(listaFiltrada);
     setFlagFilter(true);
-  }, [search]);
+  }, [search, user]);
+
   return (
     <main>
       <header className={style.cabecalho}>
@@ -48,14 +45,16 @@ export default function CustomersList() {
       <section className={style.table_clientes}>
         <table>
           <thead>
-            <td>Nome</td>
-            <td>Email</td>
+            <tr>
+              <td>Nome</td>
+              <td>Email</td>
+            </tr>
           </thead>
           <tbody>
             {search === "" || flagFilter === false
               ? user.map((userData) => (
                   <tr key={userData.id}>
-                    <td>{userData.nome}</td>
+                    <td>{userData.name}</td>
                     <td>{userData.email}</td>
                   </tr>
                 ))
