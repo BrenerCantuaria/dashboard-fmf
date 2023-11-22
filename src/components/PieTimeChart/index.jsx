@@ -1,37 +1,62 @@
-import style from "./PieChart.module.css";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
-ChartJS.register(ArcElement, Tooltip, Legend);
-import datajson from "../../db/db.json";
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import { useEffect, useState } from "react";
+import { Pie } from "react-chartjs-2";
 import { useApi } from "../../hooks/useApi";
+import Loading from "../Load";
+import style from "./PieChart.module.css";
+import dbTeste from "../../db/db.json"
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 export default function PieChart() {
   const [manha, setManha] = useState(0);
   const [tarde, setTarde] = useState(0);
   const [noite, setNoite] = useState(0);
-  const [dataRecords, setDataRecords] = useState();
+  const [dataRecords, setDataRecords] = useState([]);
+  const [loading, setLoading] = useState(true);
   const api = useApi();
 
+  
   useEffect(() => {
-    const data = async () => {
-      const response = await api.getRecords();
-      setDataRecords(response);
+    const calculateVisits = async () => {
+      try {
+        const response = await api.getRecords()
+        setDataRecords(response)
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
     };
-    data();
+    calculateVisits();
   }, []);
-  useEffect(() => {
-    const horariosDeEntrada = datajson.map((customer) => {
-      let date = new Date(customer.horario);
-      let hour = date.getHours();
-      if (hour >= 6 && hour < 12) {
-        setManha((prevManha) => prevManha + 1);
-      } else if (hour >= 12 && hour < 18) {
-        setTarde((prevTarde) => prevTarde + 1);
-      } else {
-        setNoite((prevNoite) => prevNoite + 1);
+
+  useEffect(()=>{
+    let manhaCount = 0;
+    let tardeCount = 0;
+    let noiteCount = 0;
+    // substituir a chamada da api aqui 
+    dataRecords.forEach((customer) => {
+      function zeroOnTheLeft(num) {
+        return num >= 10 ? num : `0${num}`;
+      }
+
+      if (customer.data_entrada !== "") {
+        const horas = new Date(customer.data_entrada).getHours();
+        const addZeroNoIncio = zeroOnTheLeft(horas);
+        if (addZeroNoIncio >= 6 && addZeroNoIncio < 12) {
+          manhaCount += 1;
+        } else if (addZeroNoIncio >= 12 && addZeroNoIncio < 18) {
+          tardeCount += 1;
+        } else if (addZeroNoIncio >= 18) {
+          noiteCount += 1;
+        }
       }
     });
-  }, []);
+
+    setManha(manhaCount);
+    setTarde(tardeCount);
+    setNoite(noiteCount);
+  },[dataRecords])
+
 
   const data = {
     labels: ["Manhã", "Tarde", "Noite"],
@@ -55,7 +80,7 @@ export default function PieChart() {
 
   return (
     <div className={style.container}>
-      <Pie data={data} />
+        {loading ? <Loading/> : <Pie data={data}/>}
     </div>
   );
 }
