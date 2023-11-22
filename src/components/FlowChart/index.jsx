@@ -8,10 +8,11 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import datajson from "../../db/db.json";
 import style from "./FlowCard.module.css";
 import { useEffect, useState } from "react";
 import { useApi } from "../../hooks/useApi";
+import dbTeste from "../../db/db.json"
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,28 +22,32 @@ ChartJS.register(
   Legend
 );
 
+{
+  /*
+  -Endpoint getRecords
+  - user.data_entrada é o campo para acessar os valores
+  - pegar a data atual, para então adicionar ao gráfico
+*/
+}
+
 export default function FlowCard() {
   const api = useApi();
-  const [dataResponse,setDataResponse] = useState(null);
+  const [dataResponse, setDataResponse] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
-      // Verifique se já temos os dados antes de fazer uma nova chamada.
-      if (dataResponse === null) {
+      // if (dataResponse === null) {
         try {
-          const response = await api.getFluxoDeEntrada();
+          const response = await api.getRecords();
           setDataResponse(response);
         } catch (error) {
-          // Lide com erros de forma apropriada
           console.error("Erro ao buscar dados:", error);
         }
-      }
+      // }
     };
 
     fetchData();
-  }, [dataResponse]); 
-  
- 
-
+  }, []);
   // config do gráfico
   const options = {
     plugins: {
@@ -81,12 +86,18 @@ export default function FlowCard() {
   );
 
   //subtituir pela chamada da API AQUI
-  datajson.forEach((customer) => {
-    const hora = customer.horario.split("T")[1].slice(0, -3);
-    horariosDeVisitas[hora] =
-      (horariosDeVisitas[hora] || 0) + customer.total_de_visitas;
+  dataResponse.forEach((customer) => {
+    function zeroOnTheLeft(num) {
+      return num >= 10 ? num : `0${num}`;
+    }
+   if(customer.data_entrada != ""){
+    const hora = new Date(customer.data_entrada).getHours();
+    const addZeroNoIncio = zeroOnTheLeft(hora);
+    const horaString = String(addZeroNoIncio) + ":00";
+    console.log(horaString)
+    horariosDeVisitas[horaString] = (horariosDeVisitas[horaString] || 0) + 1;
+   }
   });
-
   const horariosOrdenados = Object.keys(horariosDeVisitas).sort((a, b) => {
     const aDate = new Date(`2023-10-18T${a}:00`);
     const bDate = new Date(`2023-10-18T${b}:00`);
