@@ -12,17 +12,23 @@ export default function AuthProvider({ children }) {
 
   const signin = async (email, password) => {
     const data = await api.signin(email, password);
-    console.log("data signin:", data);
-    if (data.user && data.token) {
-      setUser(data.user);
-      persistUser(data.user);
-      setToken(data.token);
-      return true;
+    // add  veificação se é admin ou não
+    // mudar aqui para data.tipo
+    if(data.tipo === "Administrador"){
+      if (data.user && data.token) {
+        setUser(data.user);
+        persistUser(data.user);
+        setToken(data.token);
+        return true;
+      }
     }
+      
+    
+   
     return false;
   };
+  
   const persistUser = (user) => {
-    console.log("Persistir o user");
     window.localStorage.setItem("user", JSON.stringify(user));
   };
   

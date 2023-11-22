@@ -8,7 +8,6 @@ function RequireAuth({ children }) {
   // Validar o token antes dessa parte,
   // 422 no interceptor deve apagar o token e redirecionar para o login
   const auth = useContext(AuthContext);
-  console.log("Passou aqui");
   if (!auth.user && !localStorage.getItem("user")) {
     return <Login />;
   }
