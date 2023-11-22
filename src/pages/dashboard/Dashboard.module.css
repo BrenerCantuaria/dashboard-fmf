@@ -1,10 +1,9 @@
-  .container {
+.container {
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-gap: 10px;
-  background-color: #2C3333;
-
+  background-color: #2c3333;
 }
 .grid_item {
   display: grid;
@@ -14,10 +13,9 @@
   justify-content: center;
   align-items: center;
 }
-.card{
+.card {
   display: grid;
-  grid-template-rows: 1fr ;
-  grid-gap: 12px;
+  /* grid-template-rows: 1fr; */
   padding: 0.5rem;
   justify-items: center;
   align-items: center;
@@ -29,17 +27,23 @@
   border: 1px solid #000; /* Apenas para visualização das áreas */
 }
 
+.grid_buttons{
+  height: 10rem;
+  background-color: cadetblue;
+  align-items: center;
+  border: 1px solid #000;
+}
+
 @media (min-width: 756px) {
   .grid_item {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr; /* Duas linhas de tamanho igual */
     /* Remova a configuração de colunas */
   }
-  .card{
+  .card {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     justify-items: center;
     align-items: center;
   }
-  
 }
