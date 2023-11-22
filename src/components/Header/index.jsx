@@ -10,27 +10,31 @@ export default function Header() {
     await auth.signout();
   };
   return (
-    <nav className={style.header}>
-      <ul>
-        <li className={location.pathname === "/" ? style.active_link : ""}>
-          <Link to="/">DashBoard</Link>
-        </li>
-        <li
-          className={location.pathname === "/Clientes" ? style.active_link : ""}
-        >
-          <Link to="/Clientes">Clientes</Link>
-        </li>
-        {auth.user && (
-          <li>
-            <Link to="/Login" onClick={handleLogOut}>
-              Sair
-            </Link>
+    <>
+      <nav className={style.header}>
+        <ul>
+          <li className={location.pathname === "/" ? style.active_link : ""}>
+            <Link to="/">DashBoard</Link>
           </li>
-        )}
-      </ul>
-      <div>
-        <h3>{auth.user?.email}</h3>
-      </div>
-    </nav>
+          <li
+            className={
+              location.pathname === "/Clientes" ? style.active_link : ""
+            }
+          >
+            <Link to="/Clientes">Clientes</Link>
+          </li>
+          {auth.user && (
+            <li>
+              <Link to="/Login" onClick={handleLogOut}>
+                Sair
+              </Link>
+            </li>
+          )}
+        </ul>
+        <div className={style.header}>
+          <h3>{auth.user?.nome}</h3>
+        </div>
+      </nav>
+    </>
   );
 }
