@@ -1,7 +1,7 @@
 import axios from "axios";
 const api = axios.create({
   // baseURL: "URL_AQUI",
-  baseURL: "http://172.16.7.121:3000",
+ 
 });
 const token = localStorage.getItem("token");
 api.defaults.headers.common = { Authorization: `bearer ${token}` };
@@ -31,7 +31,7 @@ api.interceptors.response.use(
 export const useApi = () => ({
   //login
   signin: async (email, password) => {
-    return{ user:{nome:"User", email:"user@gmail.com", tipo: "Administrador"}, token:"tokenDeTeste"}
+    return{ user:{nome:"User", email:"user@teste.com", tipo: "Administrador"}, token:"tokenDeTeste"}
     const response = await api.post("/login", {
       email: email,
       senha: password,
