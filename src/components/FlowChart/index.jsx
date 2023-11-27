@@ -86,7 +86,7 @@ export default function FlowCard() {
   );
 
   //subtituir pela chamada da API AQUI
-  dataResponse.forEach((customer) => {
+  dbTeste.forEach((customer) => {
     function zeroOnTheLeft(num) {
       return num >= 10 ? num : `0${num}`;
     }

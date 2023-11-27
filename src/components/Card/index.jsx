@@ -19,12 +19,13 @@ export default function Card({ title }) {
   useEffect(() => {
    
 
-    const visitasValidas = data.filter(
+    const visitasValidas = dbTeste.filter(
       (visita) => visita.data_entrada != ""
     );
     const totalVisitasPorDia = visitasValidas.reduce((total, visita) => {
       console.log("total: ",total)
       const diaDaSemana = new Date(visita.data_entrada).getDay();
+      console.log("dia:",diaDaSemana)
       total[diaDaSemana]++;
       return total;
     }, Array(7).fill(0));
@@ -36,20 +37,20 @@ export default function Card({ title }) {
       <header>
         <h1>
           {title}
-          <span> {new Date().getDay()}</span>
+          {/* <span> {new Date().getDay()}</span> */}
         </h1>
       </header>
       <div className={style.content}>
         <table className={style.table_total_de_visitas_na_semana}>
           <thead>
             <tr>
+              <th>Domingo</th>
               <th>Segunda-feira</th>
               <th>Terça-feira</th>
               <th>Quarta-feira</th>
               <th>Quinta-feira</th>
               <th>Sexta-feira</th>
               <th>Sábado</th>
-              <th>Domingo</th>
             </tr>
           </thead>
           <tbody>
