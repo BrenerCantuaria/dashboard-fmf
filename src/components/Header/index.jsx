@@ -32,7 +32,7 @@ export default function Header() {
           )}
         </ul>
         <div className={style.header}>
-          <h3>{auth.user?.nome}</h3>
+          {/* <h3>{auth.user?.nome}</h3> */}
         </div>
       </nav>
     </>
