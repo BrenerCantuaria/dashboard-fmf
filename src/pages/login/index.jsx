@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth/authcontext";
 import style from "./Login.module.css";
+import { Paper, Typography } from '@mui/material';
+
 function Login() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -25,7 +27,19 @@ function Login() {
     <main className={style.container}>
       <div className={style.esquerda}>Logo aqui </div>
       <div className={style.direita}>
+        
         <h1 className={style.cabecalho}>Login</h1>
+        <div className={style.mensagemFixa}>
+          <Paper elevation={3} className={style.paper}>
+            <Typography variant="body1">
+              Para demonstração, utilize o seguinte login:
+              <br />
+              E-mail: user@teste.com
+              <br />
+              Senha: 12345
+            </Typography>
+          </Paper>
+        </div>
         <h2 className={style.cabecalho}>Seja bem-vindo</h2>
         <form
           method="post"

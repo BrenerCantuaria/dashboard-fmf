@@ -11,6 +11,20 @@
 .esquerda {
   display: none;
 }
+/* Seu arquivo de estilos CSS */
+
+.mensagemFixa {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000; /* Ajuste conforme necessário para empilhamento */
+}
+
+.paper {
+  padding: 10px;
+}
+
+
 .btn_enviar {
   cursor: pointer;
   width: 100%;
