@@ -1,4 +1,6 @@
 .botoes{
+    display: flex;
+    flex-wrap: wrap;
     height: inherit;
     display: flex;
     justify-content: center;
