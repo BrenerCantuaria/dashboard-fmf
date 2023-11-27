@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useApi } from "../../hooks/useApi";
 import style from "./Table.module.css";
 import Loading from "../Load";
-
+import dbAgendamento from "../../db/dbAgendamentos.json"
 function Table() {
   const api = useApi();
   const [data, setDataResponse] = useState([]);
@@ -10,7 +10,7 @@ function Table() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.getVisitas();
+        const response = await api.getTeste();
         setDataResponse(response);
         setLoading(false)
       } catch (error) {
@@ -42,13 +42,13 @@ function Table() {
           </thead>
           <tbody>
             {loading ? (<Loading/>) : (
-              data.map((customer) => {
+              dbAgendamento.map((customer) => {
               return (
                 <tr key={customer.id} className={style.items}>
                   <td>{customer.nome}</td>
-                  <td>{customer.id}</td>
                   <td>{customer.torre}</td>
-                  <td>{customer.totalVisitas}</td>
+                  <td>{customer.apartamento}</td>
+                  <td>{customer.total_visitas}</td>
                 </tr>
               );
             })

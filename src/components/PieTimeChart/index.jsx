@@ -34,7 +34,7 @@ export default function PieChart() {
     let tardeCount = 0;
     let noiteCount = 0;
     // substituir a chamada da api aqui 
-    dataRecords.forEach((customer) => {
+    dbTeste.forEach((customer) => {
       function zeroOnTheLeft(num) {
         return num >= 10 ? num : `0${num}`;
       }
@@ -80,7 +80,7 @@ export default function PieChart() {
 
   return (
     <div className={style.container}>
-        {loading ? <Loading/> : <Pie data={data}/>}
+         <Pie data={data}/>
     </div>
   );
 }
