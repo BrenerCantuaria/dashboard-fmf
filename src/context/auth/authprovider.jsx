@@ -12,9 +12,10 @@ export default function AuthProvider({ children }) {
 
   const signin = async (email, password) => {
     const data = await api.signin(email, password);
+    console.log(data)
     // add  veificação se é admin ou não
     // mudar aqui para data.tipo
-    if(data.tipo === "Administrador"){
+    if(data.user.tipo === "Administrador" && data.user.email == email){
       if (data.user && data.token) {
         setUser(data.user);
         persistUser(data.user);
