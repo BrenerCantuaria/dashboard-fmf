@@ -22,7 +22,7 @@ export default function CustomersList() {
   useEffect(() => {
     const listaFiltrada = user.filter((userDoFilter) => {
       // userDoFilter.nome mudar para name
-      const firstName = String(userDoFilter.nome).includes(search)
+      const firstName = String(userDoFilter.name).includes(search)
       return firstName; 
     });
     setFiltered(listaFiltrada);
@@ -43,8 +43,9 @@ export default function CustomersList() {
         <FcSearch size={30} />
       </div>
       <section className={style.table_clientes}>
-        <table>
-          <thead>
+      <div className={style.content}>
+      <table className={style.table_container}>
+          <thead className={style.table_container_head}>
             <tr>
               <td>Nome</td>
               <td>Email</td>
@@ -66,6 +67,8 @@ export default function CustomersList() {
                 ))}
           </tbody>
         </table>
+      </div>
+        
       </section>
     </main>
   );
