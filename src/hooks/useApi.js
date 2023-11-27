@@ -31,7 +31,7 @@ api.interceptors.response.use(
 export const useApi = () => ({
   //login
   signin: async (email, password) => {
-    // return{ user:{nome:"Márcio", email:"marcio@gmail.com", tipo: "Administrador"}, token:"tokenaaqui"}
+    return{ user:{nome:"User", email:"user@gmail.com", tipo: "Administrador"}, token:"tokenDeTeste"}
     const response = await api.post("/login", {
       email: email,
       senha: password,
